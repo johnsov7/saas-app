@@ -21,12 +21,11 @@ a:hover, a:focus {
 }
 
 .nav.navbar-nav {
-
-.navbar-link {
-  border-radius: 5px;
-  color: #fff;
-  margin-top: 15px;
-  padding: 8px;
+  .navbar-link {
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 15px;
+    padding: 8px;
 }
 
 .navbar-link:focus, .navbar-link:hover {
@@ -40,10 +39,9 @@ li a {
 }
 
 .nav.navbar-right li {
-
-.btn {
-  color: #fff !important;
-  margin-top: 5%;
+  .btn {
+    color: #fff !important;
+    margin-top: 5%;
 }
 
 .btn-danger:hover, .btn-danger:focus {
@@ -119,3 +117,12 @@ h2 {
 .no-right-padding {
   padding-right: 0 !important;
 } 
+
+.table tr td {
+  a.main-link {
+    color: #428bca;
+  }
+  a.main-link:hover {
+    background: none;
+  }
+}

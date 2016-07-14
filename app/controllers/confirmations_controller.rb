@@ -1,4 +1,4 @@
-class ConfirmationsController < Milia::ConfirmationController
+class ConfirmationsController < Milia::ConfirmationsController
   def update
     if @confirmable.attempt_set_password(user_params)
 
@@ -34,9 +34,9 @@ class ConfirmationsController < Milia::ConfirmationController
       self.resource = resource_class.confirm_by_token(params[:confirmation_token])
       yield resource if block_given?
       
-      if resource.errrors.empty?
-        set_flash_message(:notice, :confirmed) if is_flashing_format
-      end  
+      if resource.errors.empty?
+        set_flash_message(:notice, :confirmed) if is_flashing_format?
+      end
       
       if @confirmable.skip_confirm_change_password
         sign_in_tenanted_and_redirect(resource)
@@ -49,19 +49,18 @@ class ConfirmationsController < Milia::ConfirmationController
     # else fall thru to show template which is form to set a password
     # upon SUBMIT, processing will continue from update
   end
-
+  
   def after_confirmation_path_for(resource_name, resource)
     if user_signed_in?
       root_path
     else
       new_user_session_path
-    end  
+    end
   end
-  
+
   private
   
   def set_confirmable()
-    @confirmable = User.find_or_initialize_with_error_by(:confirmation_token, params[confirmation_token])
+    @confirmable = User.find_or_initialize_with_error_by(:confirmation_token, params[:confirmation_token])
   end
-  
-end  
+end
